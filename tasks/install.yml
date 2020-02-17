@@ -1,0 +1,12 @@
+---
+- include_tasks: install-Debian.yml
+  when: ansible_os_family == "Debian"
+
+- include_tasks: install-Redhat.yml
+  when: ansible_os_family == "Redhat"
+
+- name: Ensure Auditbeat is started and enabled on boot
+  service:
+    name: auditbeat
+    state: started
+    enabled: "{{ auditbeat_enable_on_boot }}"

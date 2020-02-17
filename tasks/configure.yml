@@ -1,0 +1,25 @@
+---
+- name: Configure Auditbeat
+  template:
+    src: templates/auditbeat.yml.j2
+    dest: "{{ auditbeat_conf_path }}/auditbeat.yml"
+  notify: Restart Auditbeat
+
+- name: Configure Auditbeat rules
+  template:
+    src: templates/auditbeat-rule.conf.j2
+    dest: "{{ auditbeat_rules_path }}/{{ item.key }}.conf"
+  vars:
+    rules: "{{ item.value }}"
+  loop: "{{ auditbeat_rules | dict2items }}"
+  notify: Restart Auditbeat
+
+- name: Setup Index and other Elasticsearch stuff
+  shell:
+    cmd: auditbeat setup --index-management
+  when: auditbeat_setup_index == true
+
+- name: Setup Kibana Dashboards
+  shell:
+    cmd: auditbeat setup --dashboards
+  when: auditbeat_setup_dashboards == true

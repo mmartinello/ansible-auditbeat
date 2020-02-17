@@ -1,0 +1,36 @@
+---
+# Metricbeat major version to be installed
+auditbeat_major_version: 7
+
+# Enable Metricbeat starting on boot
+auditbeat_enable_on_boot: true
+
+# Path configuration
+auditbeat_conf_path: /etc/auditbeat
+auditbeat_rules_path: /etc/auditbeat/audit.rules.d
+
+# Kibana host
+kibana_host: "localhost:5601"
+
+# Kibana Space ID
+kibana_space_id: ""
+
+# Elasticsearch output configuration
+elasticsearch_output_enabled: true
+elasticsearch_hosts: ['localhost:9200']
+elasticsearch_protocol:
+elasticsearch_username:
+elasticsearch_password:
+
+# Logstash output configuration
+logstash_output_enabled: false
+logstash_certificate_authorities:
+logstash_ssl_certificate_path:
+logstash_ssl_key_path:
+
+# Setup index and dashboards
+auditbeat_setup_index: false
+auditbeat_setup_dashboards: false
+
+# Auditbeat rules
+auditbeat_rules: {}
